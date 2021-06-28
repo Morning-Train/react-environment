@@ -2,19 +2,16 @@ import React from 'react'
 import { usePipeline } from '@morningtrain/react-pipelines'
 import { useOnEnvChange } from '../hooks'
 
-export default function TriggerPipelineOnEnvChange({
-  path,
+export default function TriggerPipelineOnEnvChange ({
+  path
 }) {
-
   const pipeline = usePipeline()
 
-  useOnEnvChange(path,() => {
-
+  useOnEnvChange(path, () => {
     const payload = {}
 
     pipeline.trigger(payload)
-
-  }, [])
+  }, [pipeline])
 
   return null
 }

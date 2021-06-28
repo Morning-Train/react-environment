@@ -4,7 +4,7 @@ import postcss from 'rollup-plugin-postcss'
 import resolve from '@rollup/plugin-node-resolve'
 import url from '@rollup/plugin-url'
 import autoExternal from 'rollup-plugin-auto-external'
-import cleaner from 'rollup-plugin-cleaner';
+import cleaner from 'rollup-plugin-cleaner'
 
 export default {
   input: 'src/index.js',
@@ -24,7 +24,7 @@ export default {
       preserveModules: true
     }
   ],
-  external: id => id.includes('lodash') || ['react', 'prop-types'].includes(id),
+  external: id => id.includes('@morningtrain') || id.includes('lodash') || ['react', 'prop-types'].includes(id),
   plugins: [
     cleaner({
       targets: [

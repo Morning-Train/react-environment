@@ -18,7 +18,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "react": "^16.14.0 || ^17 || ^18",
+        "react": "^16.14.0",
         "prop-types": "^15.7.2",
         "lodash": "^4.17.20",
         "@morningtrain/react-pipelines": "^1.6.7"
@@ -44,7 +44,7 @@
         "eslint-plugin-react": "^7.21.5",
         "eslint-plugin-react-hooks": "^4.2.0",
         "jest-enzyme": "^7.1.2",
-        "react-dom": "^16.14.0 ||  ^17 || ^18",
+        "react-dom": "^16.14.0",
         "react-scripts": "^1.1.4",
         "react-test-renderer": "^16.14.0",
         "rollup": "^2.35.1",

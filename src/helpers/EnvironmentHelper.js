@@ -1,45 +1,42 @@
-import Repository from "./Repository";
+import Repository from './Repository'
 
 export default class EnvironmentHelper extends Repository {
+  constructor (initialData) {
+    const __global = window || global
+    const data = initialData || (__global.env || { })
 
-	constructor(initialData) {
+    super(data)
 
-		let __global = window || global;
-		let data = initialData || (__global.env || { })
+    // Attach server side setEnv helper
+    if (this.server()) {
+      const env = this
 
-		super(data);
+      __global.setEnv = function (data) {
+        env.set(data)
+      }
+    }
+  }
 
-		// Attach server side setEnv helper
-		if (this.server()) {
-			let env = this;
+  server () {
+    return this.get('environment') === 'server'
+  }
 
-			__global["setEnv"] = function (data) {
-				env.set(data);
-			};
-		}
-	}
+  client () {
+    return this.server() === false
+  }
 
-	server() {
-		return this.get("environment") === "server";
-	}
+  debug () {
+    return this.get('debug', true) === true
+  }
 
-	client() {
-		return this.server() === false;
-	}
+  csrfToken () {
+    if (this.server()) {
+      return
+    }
 
-	debug() {
-		return this.get("debug", true) === true;
-	}
-
-	csrfToken() {
-		if (this.server()) {
-			return;
-		}
-
-		const tokenMeta = document.head.querySelector("meta[name=csrf-token]");
-		return tokenMeta ? tokenMeta.content : null;
-	}
-
+    const tokenMeta = document.head.querySelector('meta[name=csrf-token]')
+    return tokenMeta ? tokenMeta.content : null
+  }
 }
 
 export const Env = new EnvironmentHelper()

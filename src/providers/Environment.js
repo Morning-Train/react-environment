@@ -1,15 +1,16 @@
 import React from 'react'
-import {EnvContext} from '../contexts'
+import { EnvContext } from '../contexts'
 import EnvironmentHelper from '../helpers/EnvironmentHelper'
 
-export default function Environment({
+export default function Environment ({
   data = null,
+  env = null,
   children
 }) {
-  const env = new EnvironmentHelper(data)
+  const _env = env || new EnvironmentHelper(data)
 
   return (
-    <EnvContext.Provider value={env} >
+    <EnvContext.Provider value={_env}>
       {children}
     </EnvContext.Provider>
   )
