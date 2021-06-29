@@ -21,7 +21,7 @@
         "react": "^16.14.0",
         "prop-types": "^15.7.2",
         "lodash": "^4.17.20",
-        "@morningtrain/react-pipelines": "^1.6.7"
+        "@morningtrain/react-pipelines": "^1.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.10.3",

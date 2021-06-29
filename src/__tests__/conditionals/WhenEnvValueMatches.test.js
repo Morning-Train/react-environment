@@ -2,7 +2,7 @@ import React from 'react'
 import { mount, shallow } from 'enzyme'
 import { act } from 'react-dom/test-utils'
 import {
-  WhenEnvValueMatches, Environment
+  WhenEnvValueMatches, Environment, EnvironmentHelper
 } from '../..'
 
 it('renders without environment', () => {
@@ -69,6 +69,41 @@ it('does not render children using root path - negated', () => {
       </WhenEnvValueMatches>
     </Environment>
   )
+
+  expect(wrapper.text()).toEqual('')
+})
+
+
+it('renders children after env upd', async () => {
+  expect.assertions(3)
+
+  const env = new EnvironmentHelper({ test: 'wrong_value' })
+
+  const wrapper = mount(
+    <Environment env={env}>
+      <WhenEnvValueMatches path='test' matches='value'>
+        test
+      </WhenEnvValueMatches>
+    </Environment>
+  )
+
+  await act(async () => wrapper.update())
+
+  expect(wrapper.text()).toEqual('')
+
+  act(() => {
+    env.set('test', 'value')
+  })
+
+  await act(async () => wrapper.update())
+
+  expect(wrapper.text()).toEqual('test')
+
+  act(() => {
+    env.set('test', 'crappy value')
+  })
+
+  await act(async () => wrapper.update())
 
   expect(wrapper.text()).toEqual('')
 })
