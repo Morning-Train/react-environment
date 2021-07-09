@@ -18,19 +18,24 @@ module.exports = {
       'pipelines/on-click-pipeline'
     ],
     Pipes: [
-      'pipes/callback-on-pipe'
+      'pipes/set-env-value-on-pipe',
+      'pipes/set-env-value-on-payload-on-pipe'
     ],
     Triggers: [
-      'triggers/trigger-pipeline-on-click',
-      'triggers/trigger-pipeline-on-callback'
+      'triggers/trigger-pipeline-on-env-change'
     ],
     Conditionals: [
       'conditionals/when-env-value-matches',
     ],
+    Providers: [
+      'providers/environment',
+    ],
+    Helpers: [
+      'helpers/with-env-value',
+    ],
     Hooks: [
-      'hooks/use-will-pipe',
-      'hooks/use-is-piping',
-      'hooks/use-pipeline'
+      'hooks/use-env',
+      'hooks/use-env-value'
     ],
     Cookbook: [
       'cookbook/basic-pipeline',

@@ -7,10 +7,10 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'Morning-Train', // Usually your GitHub org/user name.
-  projectName: 'react-pipelines', // Usually your repo name.
+  projectName: 'react-environment', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'React Pipelines',
+      title: 'React Environment',
       items: [
         {
           href: 'https://morningtrain.dk/en',
