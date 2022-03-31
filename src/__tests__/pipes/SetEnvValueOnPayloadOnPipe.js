@@ -1,15 +1,16 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+import '@testing-library/jest-dom/extend-expect'
+import {render} from '@testing-library/react'
 import { Environment, EnvironmentHelper, SetEnvValueOnPayloadOnPipe, TriggerPipelineOnEnvChange } from '../..'
 import { CallbackOnPipe, ConditionalNestedPipeline, Pipeline } from '@morningtrain/react-pipelines'
+import { act } from 'react-dom/test-utils'
 
 it('does trigger on env change', async () => {
   const mockCallBack = jest.fn()
   expect.assertions(4)
 
   const env = new EnvironmentHelper({ some: 'data' })
-  const wrapper = mount(
+  render(
     <Environment env={env}>
       <Pipeline>
         <TriggerPipelineOnEnvChange path='some' />
@@ -21,25 +22,23 @@ it('does trigger on env change', async () => {
     </Environment>
   )
 
-  await act(async () => wrapper.update())
+  expect(mockCallBack.mock.calls.length).toEqual(0)
+
+  await act(() => {
+    env.set('some', 'other value')
+  })
 
   expect(mockCallBack.mock.calls.length).toEqual(0)
 
-  env.set('some', 'other value')
-
-  await act(async () => wrapper.update())
-
-  expect(mockCallBack.mock.calls.length).toEqual(0)
-
-  env.set('some', 'value')
-
-  await act(async () => wrapper.update())
+  await act(() => {
+    env.set('some', 'value')
+  })
 
   expect(mockCallBack.mock.calls.length).toEqual(1)
 
-  env.set('some', 'value')
-
-  await act(async () => wrapper.update())
+  await act(() => {
+    env.set('some', 'value')
+  })
 
   expect(mockCallBack.mock.calls.length).toEqual(2)
 })

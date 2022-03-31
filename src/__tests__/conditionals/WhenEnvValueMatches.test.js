@@ -1,12 +1,13 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import '@testing-library/jest-dom/extend-expect'
+import {render, screen} from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 import {
   WhenEnvValueMatches, Environment, EnvironmentHelper
 } from '../..'
 
 it('renders without environment', () => {
-  mount(
+  render(
     <WhenEnvValueMatches>
       test
     </WhenEnvValueMatches>
@@ -14,63 +15,73 @@ it('renders without environment', () => {
 })
 
 it('renders children using root path', () => {
-  const wrapper = mount(
-    <Environment data={{ test: 'value' }}>
-      <WhenEnvValueMatches path='test' matches='value'>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={{ test: 'value' }}>
+        <WhenEnvValueMatches path='test' matches='value'>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toEqual('test')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('test');
 })
 
 it('renders children using callback', () => {
-  const wrapper = mount(
-    <Environment data={{ test: 'value' }}>
-      <WhenEnvValueMatches path='test' matches={val => val === 'value'}>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={{ test: 'value' }}>
+        <WhenEnvValueMatches path='test' matches={val => val === 'value'}>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toEqual('test')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('test');
 })
 
 it('renders children using mixed number types', () => {
-  const wrapper = mount(
-    <Environment data={{ test: 1 }}>
-      <WhenEnvValueMatches path='test' matches='1'>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={{ test: 1 }}>
+        <WhenEnvValueMatches path='test' matches='1'>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toEqual('test')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('test');
 })
 
 it('does not render children using wrong match', () => {
-  const wrapper = mount(
-    <Environment data={{ test: 123 }}>
-      <WhenEnvValueMatches path='test' matches='1'>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={{ test: 123 }}>
+        <WhenEnvValueMatches path='test' matches='1'>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toEqual('')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('');
 })
 
 it('does not render children using root path - negated', () => {
-  const wrapper = mount(
-    <Environment data={{ test: 'value' }}>
-      <WhenEnvValueMatches path='test' matches='value' negate>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={{ test: 'value' }}>
+        <WhenEnvValueMatches path='test' matches='value' negate>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toEqual('')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('');
 })
 
 
@@ -79,31 +90,27 @@ it('renders children after env upd', async () => {
 
   const env = new EnvironmentHelper({ test: 'wrong_value' })
 
-  const wrapper = mount(
-    <Environment env={env}>
-      <WhenEnvValueMatches path='test' matches='value'>
-        test
-      </WhenEnvValueMatches>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment env={env}>
+        <WhenEnvValueMatches path='test' matches='value'>
+          test
+        </WhenEnvValueMatches>
+      </Environment>
+    </div>
   )
 
-  await act(async () => wrapper.update())
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('');
 
-  expect(wrapper.text()).toEqual('')
-
-  act(() => {
+  await act(() => {
     env.set('test', 'value')
   })
 
-  await act(async () => wrapper.update())
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('test');
 
-  expect(wrapper.text()).toEqual('test')
-
-  act(() => {
+  await act(() => {
     env.set('test', 'crappy value')
   })
 
-  await act(async () => wrapper.update())
-
-  expect(wrapper.text()).toEqual('')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('');
 })

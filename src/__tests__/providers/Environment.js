@@ -1,13 +1,13 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
-import { act } from 'react-dom/test-utils'
+import '@testing-library/jest-dom/extend-expect'
+import {render, screen} from '@testing-library/react'
 import {
   WithEnvValue,
   Environment
 } from '../..'
 
 it('renders without crashing', () => {
-  mount(
+  render(
     <Environment>
       test
     </Environment>
@@ -15,7 +15,7 @@ it('renders without crashing', () => {
 })
 
 it('renders with data without crashing', () => {
-  mount(
+  render(
     <Environment data={{ some: 'data' }}>
       test
     </Environment>
@@ -23,7 +23,7 @@ it('renders with data without crashing', () => {
 })
 
 it('renders with null data without crashing', () => {
-  mount(
+  render(
     <Environment data={{ some: 'data' }}>
       test
     </Environment>
@@ -31,7 +31,7 @@ it('renders with null data without crashing', () => {
 })
 
 it('renders with numeric data without crashing', () => {
-  mount(
+  render(
     <Environment data={3}>
       test
     </Environment>
@@ -39,7 +39,7 @@ it('renders with numeric data without crashing', () => {
 })
 
 it('renders with string data without crashing', () => {
-  mount(
+  render(
     <Environment data='string data'>
       test
     </Environment>
@@ -55,25 +55,30 @@ it('global data is accessible to children', () => {
     }
   }
 
-  const wrapper = mount(
-    <Environment>
-      <WithEnvValue path='some.test.data'>
-        {val => val}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment>
+        <WithEnvValue path='some.test.data'>
+          {val => val}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toBe('value')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('value');
 
-  const wrapper2 = mount(
-    <Environment>
-      <WithEnvValue path='some.test'>
-        {val => val.data}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper-2">
+      <Environment>
+        <WithEnvValue path='some.test'>
+          {val => val.data}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper2.text()).toBe('value')
+  expect(screen.getByTestId('wrapper-2')).toHaveTextContent('value');
+
 })
 
 it('local data is accessible to children', () => {
@@ -91,25 +96,29 @@ it('local data is accessible to children', () => {
     }
   }
 
-  const wrapper = mount(
-    <Environment data={envData}>
-      <WithEnvValue path='some.test.data' defaultValue='test_default_value'>
-        {val => val}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={envData}>
+        <WithEnvValue path='some.test.data' defaultValue='test_default_value'>
+          {val => val}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toBe('test_default_value')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('test_default_value');
 
-  const wrapper2 = mount(
-    <Environment data={envData}>
-      <WithEnvValue path='test'>
-        {val => val.data}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper-2">
+      <Environment data={envData}>
+        <WithEnvValue path='test'>
+          {val => val.data}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper2.text()).toBe('value')
+  expect(screen.getByTestId('wrapper-2')).toHaveTextContent('value');
 })
 
 it('local data overrides global data', () => {
@@ -121,23 +130,27 @@ it('local data overrides global data', () => {
     }
   }
 
-  const wrapper = mount(
-    <Environment data={envData}>
-      <WithEnvValue path='some.test.data'>
-        {val => val}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper">
+      <Environment data={envData}>
+        <WithEnvValue path='some.test.data'>
+          {val => val}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper.text()).toBe('value')
+  expect(screen.getByTestId('wrapper')).toHaveTextContent('value');
 
-  const wrapper2 = mount(
-    <Environment data={envData}>
-      <WithEnvValue path='some.test'>
-        {val => val.data}
-      </WithEnvValue>
-    </Environment>
+  render(
+    <div data-testid="wrapper-2">
+      <Environment data={envData}>
+        <WithEnvValue path='some.test'>
+          {val => val.data}
+        </WithEnvValue>
+      </Environment>
+    </div>
   )
 
-  expect(wrapper2.text()).toBe('value')
+  expect(screen.getByTestId('wrapper-2')).toHaveTextContent('value');
 })
