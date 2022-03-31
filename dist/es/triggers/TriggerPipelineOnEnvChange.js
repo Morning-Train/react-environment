@@ -12,5 +12,5 @@ function TriggerPipelineOnEnvChange(_ref) {
   return null;
 }
 
-export default TriggerPipelineOnEnvChange;
+export { TriggerPipelineOnEnvChange as default };
 //# sourceMappingURL=TriggerPipelineOnEnvChange.js.map

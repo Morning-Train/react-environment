@@ -1,4 +1,4 @@
-import { toConsumableArray as _toConsumableArray } from '../_virtual/_rollupPluginBabelHelpers.js';
+import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
 import React from 'react';
 import useEnv from './use-env.js';
 
@@ -12,5 +12,5 @@ function useOnEnvChange(path, callback) {
   }, [env, path, callback].concat(_toConsumableArray(dependencies)));
 }
 
-export default useOnEnvChange;
+export { useOnEnvChange as default };
 //# sourceMappingURL=use-on-env-change.js.map

@@ -1,6 +1,8 @@
 'use strict';
 
-var _rollupPluginBabelHelpers = require('../_virtual/_rollupPluginBabelHelpers.js');
+var _typeof = require('@babel/runtime/helpers/typeof');
+var _classCallCheck = require('@babel/runtime/helpers/classCallCheck');
+var _createClass = require('@babel/runtime/helpers/createClass');
 var _get = require('lodash/get');
 var _set = require('lodash/set');
 var forEach = require('lodash/forEach');
@@ -12,6 +14,9 @@ var mergeWith = require('lodash/mergeWith');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
+var _typeof__default = /*#__PURE__*/_interopDefaultLegacy(_typeof);
+var _classCallCheck__default = /*#__PURE__*/_interopDefaultLegacy(_classCallCheck);
+var _createClass__default = /*#__PURE__*/_interopDefaultLegacy(_createClass);
 var _get__default = /*#__PURE__*/_interopDefaultLegacy(_get);
 var _set__default = /*#__PURE__*/_interopDefaultLegacy(_set);
 var forEach__default = /*#__PURE__*/_interopDefaultLegacy(forEach);
@@ -25,14 +30,14 @@ var Repository = /*#__PURE__*/function () {
   function Repository() {
     var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    _rollupPluginBabelHelpers.classCallCheck(this, Repository);
+    _classCallCheck__default["default"](this, Repository);
 
     this._observeCallbacks = {};
     this._observedPathsTree = {};
     this.data = data;
   }
 
-  _rollupPluginBabelHelpers.createClass(Repository, [{
+  _createClass__default["default"](Repository, [{
     key: "transform",
     value: function transform(query, callback) {
       var value = this.get(query);
@@ -52,18 +57,18 @@ var Repository = /*#__PURE__*/function () {
         return this.data;
       }
 
-      return _get__default['default'](this.data, query, defaultValue);
+      return _get__default["default"](this.data, query, defaultValue);
     }
   }, {
     key: "set",
     value: function set(query, value) {
       // Check if query is an object
-      if (_rollupPluginBabelHelpers['typeof'](query) === "object") {
+      if (_typeof__default["default"](query) === "object") {
         this.data = query;
         return this;
       }
 
-      _set__default['default'](this.data, query, value);
+      _set__default["default"](this.data, query, value);
 
       this.triggerObserveCallbacks(query);
       return this;
@@ -76,7 +81,7 @@ var Repository = /*#__PURE__*/function () {
       var parentQuery = parts.join(".");
       var target = parts.length === 0 ? this.get() : this.get(parentQuery);
 
-      if (target && _rollupPluginBabelHelpers['typeof'](target) === "object") {
+      if (target && _typeof__default["default"](target) === "object") {
         delete target[key];
       }
 
@@ -133,14 +138,14 @@ var Repository = /*#__PURE__*/function () {
         this._observeCallbacks[path] = {};
       }
 
-      var uuid = uniqueId__default['default']();
+      var uuid = uniqueId__default["default"]();
 
       var disposer = function disposer() {
         _this.removeObserveListener(path, callback);
       };
 
       this._observeCallbacks[path][uuid] = callback;
-      mergeWith__default['default'](this._observedPathsTree, setWith__default['default']({}, path, {}, Object));
+      mergeWith__default["default"](this._observedPathsTree, setWith__default["default"]({}, path, {}, Object));
       return disposer;
     }
   }, {
@@ -153,7 +158,7 @@ var Repository = /*#__PURE__*/function () {
 
         promises.push(_this2.triggerObserveCallbacksForPath(path)); /// Trigger for children
 
-        var childObservers = _get__default['default'](_this2._observedPathsTree, path);
+        var childObservers = _get__default["default"](_this2._observedPathsTree, path);
 
         if (childObservers) {
           var flattenedChildObservers = _this2._flattenObject(childObservers);
@@ -195,7 +200,7 @@ var Repository = /*#__PURE__*/function () {
         if (typeof keys !== 'undefined' && keys.length > 0) {
           keys.forEach(function (key) {
             var trigger = function trigger() {
-              if (_rollupPluginBabelHelpers['typeof'](_this3._observeCallbacks[path]) === 'object' && typeof _this3._observeCallbacks[path][key] === 'function') {
+              if (_typeof__default["default"](_this3._observeCallbacks[path]) === 'object' && typeof _this3._observeCallbacks[path][key] === 'function') {
                 _this3._observeCallbacks[path][key]();
               }
 
@@ -243,12 +248,12 @@ var Repository = /*#__PURE__*/function () {
       var flatten = function flatten(collection) {
         var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
         var suffix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-        forEach__default['default'](collection, function (value, key) {
+        forEach__default["default"](collection, function (value, key) {
           var path = "".concat(prefix).concat(key).concat(suffix);
 
-          if (isArray__default['default'](value)) {
+          if (isArray__default["default"](value)) {
             flatten(value, "".concat(path, "["), ']');
-          } else if (isPlainObject__default['default'](value) && Object.keys(value).length > 0) {
+          } else if (isPlainObject__default["default"](value) && Object.keys(value).length > 0) {
             flatten(value, "".concat(path, "."));
           }
 

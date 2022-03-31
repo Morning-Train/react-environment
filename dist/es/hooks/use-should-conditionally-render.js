@@ -1,4 +1,4 @@
-import { slicedToArray as _slicedToArray } from '../_virtual/_rollupPluginBabelHelpers.js';
+import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React from 'react';
 
 function useShouldConditionallyRender(value, match) {
@@ -42,5 +42,5 @@ function useShouldConditionallyRender(value, match) {
   return [shouldRender, setShouldRender];
 }
 
-export default useShouldConditionallyRender;
+export { useShouldConditionallyRender as default };
 //# sourceMappingURL=use-should-conditionally-render.js.map

@@ -9,13 +9,13 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 function useEnv() {
-  var env = React__default['default'].useContext(EnvContext);
+  var env = React__default["default"].useContext(EnvContext);
 
   if (env) {
     return env;
   }
 
-  return new EnvironmentHelper['default']();
+  return new EnvironmentHelper["default"]();
 }
 
 module.exports = useEnv;

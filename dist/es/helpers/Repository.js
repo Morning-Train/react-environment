@@ -1,4 +1,6 @@
-import { createClass as _createClass, typeof as _typeof, classCallCheck as _classCallCheck } from '../_virtual/_rollupPluginBabelHelpers.js';
+import _typeof from '@babel/runtime/helpers/typeof';
+import _classCallCheck from '@babel/runtime/helpers/classCallCheck';
+import _createClass from '@babel/runtime/helpers/createClass';
 import _get from 'lodash/get';
 import _set from 'lodash/set';
 import forEach from 'lodash/forEach';
@@ -251,5 +253,5 @@ var Repository = /*#__PURE__*/function () {
   return Repository;
 }();
 
-export default Repository;
+export { Repository as default };
 //# sourceMappingURL=Repository.js.map

@@ -1,4 +1,4 @@
-import { slicedToArray as _slicedToArray } from '../_virtual/_rollupPluginBabelHelpers.js';
+import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import React from 'react';
 import useEnv from './use-env.js';
 import clone from 'lodash/clone';
@@ -36,5 +36,5 @@ function useEnvValue(path) {
   return [value, setValueOverride];
 }
 
-export default useEnvValue;
+export { useEnvValue as default };
 //# sourceMappingURL=use-env-value.js.map

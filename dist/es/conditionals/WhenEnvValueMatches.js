@@ -1,4 +1,4 @@
-import { slicedToArray as _slicedToArray } from '../_virtual/_rollupPluginBabelHelpers.js';
+import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
 import 'react';
 import PropTypes from 'prop-types';
 import useEnvValue from '../hooks/use-env-value.js';
@@ -47,5 +47,5 @@ WhenEnvValueMatches.propTypes = {
   negate: PropTypes.bool
 };
 
-export default WhenEnvValueMatches;
+export { WhenEnvValueMatches as default };
 //# sourceMappingURL=WhenEnvValueMatches.js.map
