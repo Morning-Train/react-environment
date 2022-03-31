@@ -1,10 +1,11 @@
 'use strict';
 
-var _rollupPluginBabelHelpers = require('../_virtual/_rollupPluginBabelHelpers.js');
+var _slicedToArray = require('@babel/runtime/helpers/slicedToArray');
 var React = require('react');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
+var _slicedToArray__default = /*#__PURE__*/_interopDefaultLegacy(_slicedToArray);
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 function useShouldConditionallyRender(value, match) {
@@ -33,12 +34,12 @@ function useShouldConditionallyRender(value, match) {
     return false;
   }
 
-  var _React$useState = React__default['default'].useState(checkIfShouldRender(value, match) !== negate),
-      _React$useState2 = _rollupPluginBabelHelpers.slicedToArray(_React$useState, 2),
+  var _React$useState = React__default["default"].useState(checkIfShouldRender(value, match) !== negate),
+      _React$useState2 = _slicedToArray__default["default"](_React$useState, 2),
       shouldRender = _React$useState2[0],
       setShouldRender = _React$useState2[1];
 
-  React__default['default'].useEffect(function () {
+  React__default["default"].useEffect(function () {
     var nextShouldRender = checkIfShouldRender(value, match) !== negate;
 
     if (nextShouldRender !== shouldRender) {

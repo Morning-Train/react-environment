@@ -16,5 +16,5 @@ function Environment(_ref) {
   }, children);
 }
 
-export default Environment;
+export { Environment as default };
 //# sourceMappingURL=Environment.js.map

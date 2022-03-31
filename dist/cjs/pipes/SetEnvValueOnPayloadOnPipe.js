@@ -17,7 +17,7 @@ function SetEnvValueOnPayloadOnPipe(_ref) {
   reactPipelines.useWillPipe(function (payload) {
     return new Promise(function (resolve, reject) {
       var value = env.get(path, defaultValue);
-      _set__default['default'](payload, payloadPath, value);
+      _set__default["default"](payload, payloadPath, value);
       resolve(payload);
     });
   }, [env, path, payloadPath, defaultValue]);

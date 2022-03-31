@@ -12,5 +12,5 @@ function useEnv() {
   return new EnvironmentHelper();
 }
 
-export default useEnv;
+export { useEnv as default };
 //# sourceMappingURL=use-env.js.map

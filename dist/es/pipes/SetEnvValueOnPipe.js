@@ -15,5 +15,5 @@ function SetEnvValueOnPipe(_ref) {
   return null;
 }
 
-export default SetEnvValueOnPipe;
+export { SetEnvValueOnPipe as default };
 //# sourceMappingURL=SetEnvValueOnPipe.js.map

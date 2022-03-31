@@ -15,9 +15,9 @@ function Environment(_ref) {
       env = _ref$env === void 0 ? null : _ref$env,
       children = _ref.children;
 
-  var _env = env || new EnvironmentHelper['default'](data);
+  var _env = env || new EnvironmentHelper["default"](data);
 
-  return /*#__PURE__*/React__default['default'].createElement(EnvContext.Provider, {
+  return /*#__PURE__*/React__default["default"].createElement(EnvContext.Provider, {
     value: _env
   }, children);
 }

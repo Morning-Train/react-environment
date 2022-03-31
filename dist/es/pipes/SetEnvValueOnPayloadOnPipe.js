@@ -18,5 +18,5 @@ function SetEnvValueOnPayloadOnPipe(_ref) {
   return null;
 }
 
-export default SetEnvValueOnPayloadOnPipe;
+export { SetEnvValueOnPayloadOnPipe as default };
 //# sourceMappingURL=SetEnvValueOnPayloadOnPipe.js.map

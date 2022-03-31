@@ -6,9 +6,10 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
-var EnvContext = /*#__PURE__*/React__default['default'].createContext(null);
+var EnvContext = /*#__PURE__*/React__default["default"].createContext(null);
 EnvContext.Provider;
 EnvContext.Consumer;
+var EnvContext$1 = EnvContext;
 
-module.exports = EnvContext;
+module.exports = EnvContext$1;
 //# sourceMappingURL=EnvContext.js.map
